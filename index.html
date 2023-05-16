@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment Ten</title>
+    
+    <!-- css -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500&family=Cairo:wght@500&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+    
+    <div class="intro">
+        <div class="the-container">
+            <h1> تسجيل الدخول </h1>
+            <input type="text" placeholder="قم بإدخال البريد من فضلك  " name="l-name">
+            <input type="password" placeholder="الرقم السري" name="l-pass">
+            <button id="btnLogin">دخول</button>
+            <a href="./signup.html"><button id="btnCreate">إنشاء حساب جديد</button></a>
+        </div>
+    </div>
+    <div class="login">
+        <div class="the-container">
+            <h1> مرحبا بك يا  </h1>
+            <h2 id="user">Abdo</h2>
+            <button id="btnlogout">Logout</button>
+        </div>
+    </div>
+    <p id="warning">
+
+    </p>
+<!-- js files -->
+<script src="./main.js" type="module"></script>
+<script src="./login.js" type="module"></script>
+
+    <!-- script login -->
+    <script>
+        // we will use this function to login
+        function loginAccount()
+        {
+            
+            if(localStorage.getItem("userOpen") === null)
+            {
+                let element = document.querySelector(".login");
+                element.style.display = "none";
+                document.querySelector(".intro").style.display = "block";
+            }
+            else
+            {
+                let element = document.querySelector(".intro");
+                element.style.display = "none";
+                document.querySelector(".login").style.display = "block";
+                document.getElementById("user").innerHTML = JSON.parse(localStorage.getItem("userOpen")).name
+            }
+        }
+
+        loginAccount();
+
+        setTimeout(() => {
+            document.querySelector("#btnLogin").addEventListener("click",function()
+            {
+                    loginAccount();
+            })
+        }, 800);
+
+        // Logout button
+        document.querySelector("#btnlogout").addEventListener("click",function()
+        {
+            localStorage.removeItem("userOpen");
+            loginAccount();
+        })
+    </script>
+
+</body>
+</html>
